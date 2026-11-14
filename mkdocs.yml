@@ -1,0 +1,14 @@
+site_name: CUDA 并行编程完全指南
+site_description: CUDA 并行编程完全指南交互式电子书
+site_author: J.Liu
+site_url: https://lliujj.github.io/
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: zh
+
+nav:
+  - CUDA 并行编程完全指南: cuda-ebook/index.html
