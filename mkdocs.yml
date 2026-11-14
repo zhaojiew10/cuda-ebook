@@ -1,7 +1,9 @@
 site_name: CUDA 并行编程完全指南
-site_description: CUDA 并行编程完全指南交互式电子书
+site_description: 从 GPU 硬件架构到张量核心实战，共 6 个部分、54 章
 site_author: J.Liu
-site_url: https://lliujj.github.io/
+site_url: https://zhaojiew10.github.io/cuda-ebook/
+repo_url: https://github.com/zhaojiew10/cuda-ebook
+edit_uri: edit/main/docs/
 
 docs_dir: docs
 site_dir: site
@@ -9,6 +11,93 @@ site_dir: site
 theme:
   name: material
   language: zh
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+plugins:
+  - search:
+      lang:
+        - en
+        - zh
+
+markdown_extensions:
+  - tables
+  - def_list
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
 
 nav:
-  - CUDA 并行编程完全指南: cuda-ebook/index.html
+  - 电子书首页: cuda-ebook/index.md
+  - "第一部分 · GPU 硬件基础":
+      - "第 1 章 GPU Vs CPU": cuda-ebook/chapters/ch1.md
+      - "第 2 章 NVIDIA 历史": cuda-ebook/chapters/ch2.md
+      - "第 3 章 GPU架构与代系关系": cuda-ebook/chapters/ch3.md
+      - "第 4 章 如何识别GPU架构与代际": cuda-ebook/chapters/ch4.md
+      - "第 5 章 GPU 和 GPU 芯片": cuda-ebook/chapters/ch5.md
+      - "第 6 章 各架构对应的芯片型号": cuda-ebook/chapters/ch6.md
+      - "第 7 章 NVIDIA GPU 架构历史": cuda-ebook/chapters/ch7.md
+      - "第 8 章 核心对比参数": cuda-ebook/chapters/ch8.md
+      - "第 9 章 半精度、单精度与双精度": cuda-ebook/chapters/ch9.md
+      - "第 10 章 GPU 计算能力": cuda-ebook/chapters/ch10.md
+      - "第 11 章 如何阅读 GPU 技术白皮书": cuda-ebook/chapters/ch11.md
+      - "第 12 章 Volta 架构白皮书阅读": cuda-ebook/chapters/ch12.md
+  - "第二部分 · CUDA 入门与工具包":
+      - "第 13 章 CUDA 工具包概述": cuda-ebook/chapters/ch13.md
+      - "第 14 章 Linux 安装 CUDA 工具包": cuda-ebook/chapters/ch14.md
+      - "第 15 章 硬件与软件层级结构": cuda-ebook/chapters/ch15.md
+      - "第 16 章 第一个 CUDA 项目": cuda-ebook/chapters/ch16.md
+      - "第 17 章 Linux 编译运行 CUDA 程序": cuda-ebook/chapters/ch17.md
+      - "第 18 章 线程束 ID（Warp ID）": cuda-ebook/chapters/ch18.md
+      - "第 19 章 向量加法讲解": cuda-ebook/chapters/ch19.md
+  - "第三部分 · 向量加法实战":
+      - "第 20 章 向量加法扩展": cuda-ebook/chapters/ch20.md
+      - "第 21 章 大规模向量加法": cuda-ebook/chapters/ch21.md
+  - "第四部分 · 性能分析与工具":
+      - "第 22 章 运行时 API 与设备属性": cuda-ebook/chapters/ch22.md
+      - "第 23 章 nvidia-smi 详解": cuda-ebook/chapters/ch23.md
+      - "第 24 章 占用率与延迟隐藏": cuda-ebook/chapters/ch24.md
+      - "第 25 章 每 SM 活跃线程块": cuda-ebook/chapters/ch25.md
+      - "第 26 章 Nsight Compute 入门": cuda-ebook/chapters/ch26.md
+      - "第 27 章 NVIDIA 全系性能分析工具": cuda-ebook/chapters/ch27.md
+      - "第 28 章 错误检查 API 详解": cuda-ebook/chapters/ch28.md
+      - "第 29 章 命令行 Nsight Compute": cuda-ebook/chapters/ch29.md
+      - "第 30 章 图形化 Nsight Compute": cuda-ebook/chapters/ch30.md
+      - "第 31 章 性能分析方法论": cuda-ebook/chapters/ch31.md
+  - "第五部分 · 并行编程技术":
+      - "第 32 章 非 2 幂向量加法": cuda-ebook/chapters/ch32.md
+      - "第 33 章 二维线程块矩阵加法": cuda-ebook/chapters/ch33.md
+      - "第 34 章 L1 缓存命中率为零": cuda-ebook/chapters/ch34.md
+      - "第 35 章 共享内存技术详解": cuda-ebook/chapters/ch35.md
+      - "第 36 章 Visual Studio 调试技巧": cuda-ebook/chapters/ch36.md
+      - "第 36.1 章 线程束分化（Warp Divergence）": cuda-ebook/chapters/ch36x.md
+      - "第 37 章 向量归约（基准版）": cuda-ebook/chapters/ch37.md
+      - "第 38 章 向量归约代码解析": cuda-ebook/chapters/ch38.md
+      - "第 39 章 向量归约优化": cuda-ebook/chapters/ch39.md
+      - "第 40 章 竞态条件与调试": cuda-ebook/chapters/ch40.md
+      - "第 41 章 线程利用率优化": cuda-ebook/chapters/ch41.md
+      - "第 42 章 GPU 内存层级回顾": cuda-ebook/chapters/ch42.md
+      - "第 43 章 洗牌操作（Shuffle）": cuda-ebook/chapters/ch43.md
+  - "第六部分 · 矩阵乘法与张量核心":
+      - "第 44 章 屋顶线模型分析": cuda-ebook/chapters/ch44.md
+      - "第 45 章 矩阵乘法基础实现": cuda-ebook/chapters/ch45.md
+      - "第 46 章 共享内存分块优化": cuda-ebook/chapters/ch46.md
+      - "第 47 章 Float4 向量化优化": cuda-ebook/chapters/ch47.md
+      - "第 48 章 矩阵乘法分块技术": cuda-ebook/chapters/ch48.md
+      - "第 49 章 张量核心技术详解": cuda-ebook/chapters/ch49.md
+      - "第 50 章 张量核心实战评估": cuda-ebook/chapters/ch50.md
+      - "第 51 章 WMMA API 编程": cuda-ebook/chapters/ch51.md
+      - "第 52 章 WMMA API 实战案例": cuda-ebook/chapters/ch52.md
+      - "第 53 章 cuBLAS 调用张量核心": cuda-ebook/chapters/ch53.md

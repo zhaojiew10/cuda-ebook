@@ -1,0 +1,79 @@
+---
+title: "CUDA 并行编程完全指南"
+---
+
+# CUDA 并行编程完全指南
+
+从 GPU 硬件架构到张量核心实战，覆盖 CUDA 编程的完整知识体系。全书共 6 个部分、54 章，正文已转换为 Markdown，可通过左侧目录、站内搜索或下方章节目录阅读。
+
+## 第一部分 · GPU 硬件基础
+
+- [第 1 章 GPU Vs CPU](chapters/ch1.md)
+- [第 2 章 NVIDIA 历史](chapters/ch2.md)
+- [第 3 章 GPU架构与代系关系](chapters/ch3.md)
+- [第 4 章 如何识别GPU架构与代际](chapters/ch4.md)
+- [第 5 章 GPU 和 GPU 芯片](chapters/ch5.md)
+- [第 6 章 各架构对应的芯片型号](chapters/ch6.md)
+- [第 7 章 NVIDIA GPU 架构历史](chapters/ch7.md)
+- [第 8 章 核心对比参数](chapters/ch8.md)
+- [第 9 章 半精度、单精度与双精度](chapters/ch9.md)
+- [第 10 章 GPU 计算能力](chapters/ch10.md)
+- [第 11 章 如何阅读 GPU 技术白皮书](chapters/ch11.md)
+- [第 12 章 Volta 架构白皮书阅读](chapters/ch12.md)
+
+## 第二部分 · CUDA 入门与工具包
+
+- [第 13 章 CUDA 工具包概述](chapters/ch13.md)
+- [第 14 章 Linux 安装 CUDA 工具包](chapters/ch14.md)
+- [第 15 章 硬件与软件层级结构](chapters/ch15.md)
+- [第 16 章 第一个 CUDA 项目](chapters/ch16.md)
+- [第 17 章 Linux 编译运行 CUDA 程序](chapters/ch17.md)
+- [第 18 章 线程束 ID（Warp ID）](chapters/ch18.md)
+- [第 19 章 向量加法讲解](chapters/ch19.md)
+
+## 第三部分 · 向量加法实战
+
+- [第 20 章 向量加法扩展](chapters/ch20.md)
+- [第 21 章 大规模向量加法](chapters/ch21.md)
+
+## 第四部分 · 性能分析与工具
+
+- [第 22 章 运行时 API 与设备属性](chapters/ch22.md)
+- [第 23 章 nvidia-smi 详解](chapters/ch23.md)
+- [第 24 章 占用率与延迟隐藏](chapters/ch24.md)
+- [第 25 章 每 SM 活跃线程块](chapters/ch25.md)
+- [第 26 章 Nsight Compute 入门](chapters/ch26.md)
+- [第 27 章 NVIDIA 全系性能分析工具](chapters/ch27.md)
+- [第 28 章 错误检查 API 详解](chapters/ch28.md)
+- [第 29 章 命令行 Nsight Compute](chapters/ch29.md)
+- [第 30 章 图形化 Nsight Compute](chapters/ch30.md)
+- [第 31 章 性能分析方法论](chapters/ch31.md)
+
+## 第五部分 · 并行编程技术
+
+- [第 32 章 非 2 幂向量加法](chapters/ch32.md)
+- [第 33 章 二维线程块矩阵加法](chapters/ch33.md)
+- [第 34 章 L1 缓存命中率为零](chapters/ch34.md)
+- [第 35 章 共享内存技术详解](chapters/ch35.md)
+- [第 36 章 Visual Studio 调试技巧](chapters/ch36.md)
+- [第 36.1 章 线程束分化（Warp Divergence）](chapters/ch36x.md)
+- [第 37 章 向量归约（基准版）](chapters/ch37.md)
+- [第 38 章 向量归约代码解析](chapters/ch38.md)
+- [第 39 章 向量归约优化](chapters/ch39.md)
+- [第 40 章 竞态条件与调试](chapters/ch40.md)
+- [第 41 章 线程利用率优化](chapters/ch41.md)
+- [第 42 章 GPU 内存层级回顾](chapters/ch42.md)
+- [第 43 章 洗牌操作（Shuffle）](chapters/ch43.md)
+
+## 第六部分 · 矩阵乘法与张量核心
+
+- [第 44 章 屋顶线模型分析](chapters/ch44.md)
+- [第 45 章 矩阵乘法基础实现](chapters/ch45.md)
+- [第 46 章 共享内存分块优化](chapters/ch46.md)
+- [第 47 章 Float4 向量化优化](chapters/ch47.md)
+- [第 48 章 矩阵乘法分块技术](chapters/ch48.md)
+- [第 49 章 张量核心技术详解](chapters/ch49.md)
+- [第 50 章 张量核心实战评估](chapters/ch50.md)
+- [第 51 章 WMMA API 编程](chapters/ch51.md)
+- [第 52 章 WMMA API 实战案例](chapters/ch52.md)
+- [第 53 章 cuBLAS 调用张量核心](chapters/ch53.md)
