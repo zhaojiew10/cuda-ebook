@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Float4 优化的 Roofline 模型示意图</title>
+  <desc id="desc">在屋顶线模型中，float4 优化将性能点从内存受限区向右上方推进，靠近计算与内存平衡的过渡点。图中位置仅表示趋势，不代表实测坐标。</desc>
+  <defs>
+    <linearGradient id="memory-region" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e8f1fb" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#e8f1fb" stop-opacity=".18"/>
+    </linearGradient>
+    <linearGradient id="compute-region" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e4f3ec" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#e4f3ec" stop-opacity=".85"/>
+    </linearGradient>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#21845a"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7b8794"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; fill: #263647; }
+      .title { font-size: 27px; font-weight: 650; }
+      .label { font-size: 18px; }
+      .small { font-size: 15px; fill: #596c7c; }
+      .region { font-size: 20px; font-weight: 600; }
+      .axis { stroke: #435466; stroke-width: 2; }
+      .roof { fill: none; stroke: #286b9c; stroke-width: 5; stroke-linejoin: round; }
+      .grid { stroke: #cbd5df; stroke-width: 1; stroke-dasharray: 4 8; }
+    </style>
+  </defs>
+
+  <rect width="960" height="600" fill="#ffffff"/>
+  <text x="480" y="48" text-anchor="middle" class="title">Float4 优化：向计算与内存平衡靠近</text>
+  <text x="480" y="79" text-anchor="middle" class="small">Roofline 模型示意图 · 双对数坐标 · 性能点位置表示变化趋势，并非实测坐标</text>
+
+  <path d="M120 470 L120 130 L510 130 L510 470 Z" fill="url(#memory-region)"/>
+  <path d="M510 130 H860 V470 H510 Z" fill="url(#compute-region)"/>
+
+  <line x1="250" y1="130" x2="250" y2="470" class="grid"/>
+  <line x1="380" y1="130" x2="380" y2="470" class="grid"/>
+  <line x1="640" y1="130" x2="640" y2="470" class="grid"/>
+  <line x1="770" y1="130" x2="770" y2="470" class="grid"/>
+  <line x1="120" y1="385" x2="860" y2="385" class="grid"/>
+  <line x1="120" y1="300" x2="860" y2="300" class="grid"/>
+  <line x1="120" y1="215" x2="860" y2="215" class="grid"/>
+
+  <path d="M120 470 L510 130 H860" class="roof"/>
+  <text x="250" y="270" class="label" transform="rotate(-42 250 270)">带宽上限：AI × 内存带宽</text>
+  <text x="687" y="110" text-anchor="middle" class="label" fill="#286b9c">计算峰值上限</text>
+
+  <line x1="120" y1="470" x2="120" y2="130" class="axis" marker-end="url(#arrow-gray)"/>
+  <line x1="120" y1="470" x2="875" y2="470" class="axis" marker-end="url(#arrow-gray)"/>
+  <text x="490" y="525" text-anchor="middle" class="label">算术强度（FLOP/Byte）→</text>
+  <text x="40" y="310" text-anchor="middle" class="label" transform="rotate(-90 40 310)">可达性能（对数坐标）→</text>
+
+  <text x="320" y="450" text-anchor="middle" class="region" fill="#286b9c">内存受限区</text>
+  <text x="710" y="240" text-anchor="middle" class="region" fill="#287552">计算受限区</text>
+
+  <line x1="510" y1="130" x2="510" y2="470" stroke="#7b8794" stroke-width="2" stroke-dasharray="6 6"/>
+  <circle cx="510" cy="130" r="7" fill="#ffffff" stroke="#435466" stroke-width="3"/>
+  <path d="M510 130 L547 164" stroke="#7b8794" stroke-width="1.5"/>
+  <text x="555" y="170" class="label">Transition Point（过渡点）</text>
+  <text x="555" y="194" class="small">两条屋顶线的交点</text>
+  <text x="510" y="496" text-anchor="middle" class="small">AI<tspan baseline-shift="sub" font-size="11">ridge</tspan> = 计算峰值 / 内存带宽</text>
+
+  <path d="M260 398 Q365 359 469 225" fill="none" stroke="#21845a" stroke-width="4" stroke-dasharray="9 6" marker-end="url(#arrow-green)"/>
+  <text x="315" y="331" text-anchor="middle" class="label" fill="#21845a">Float4 优化方向</text>
+  <text x="315" y="354" text-anchor="middle" class="small">向量化加载、数据复用与循环展开</text>
+
+  <circle cx="260" cy="398" r="9" fill="#ffffff" stroke="#286b9c" stroke-width="4"/>
+  <text x="246" y="426" text-anchor="end" class="label">优化前</text>
+  <circle cx="469" cy="225" r="9" fill="#21845a" stroke="#ffffff" stroke-width="3"/>
+  <text x="490" y="220" class="label" fill="#21845a">优化后</text>
+  <text x="490" y="244" class="small">更接近计算与内存平衡</text>
+
+  <rect x="120" y="551" width="740" height="32" rx="4" fill="#f1f4f7"/>
+  <text x="490" y="573" text-anchor="middle" class="small">可达性能 = min（计算峰值，AI × 内存带宽）；向右表示 AI 提升，向上表示可达性能提升。</text>
+</svg>
