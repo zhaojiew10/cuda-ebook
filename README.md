@@ -1,63 +1,72 @@
 # CUDA 并行编程完全指南
 
+一本从 GPU 硬件原理出发、以 CUDA 代码实践和性能分析为主线的中文教程。全书共 **6 个部分、54 章**，从线程、线程块和内存层次等基础概念，逐步深入到共享内存分块、`float4` 向量化、张量核心与 WMMA 编程，帮助读者建立“理解硬件 → 编写内核 → 分析瓶颈 → 迭代优化”的完整知识路径。
+
 ## 在线阅读
 
 **<https://zhaojiew10.github.io/cuda-ebook/>**
 
-网站由 GitHub Actions 自动构建并部署到 GitHub Pages，包含 6 个部分、54 章，支持章节目录、站内搜索和代码语法高亮。
+网站提供完整章节目录、站内搜索和代码语法高亮，适合按顺序学习或按主题查阅。
 
-## 项目简介
+## 本书内容
 
-本项目使用 **MkDocs Material** 构建。章节正文为 Markdown，不再依赖 JavaScript 数据文件或 Canvas 动画。
+### 第一部分 · GPU 硬件基础（第 1—12 章）
 
-## 本地启动
+从 CPU 与 GPU 的设计差异入手，介绍 NVIDIA GPU 的发展、架构与芯片型号的对应关系，以及计算能力、浮点精度和性能参数。随后通过技术白皮书导读与 Volta 架构实例，建立理解后续 CUDA 编程和性能优化所需的硬件基础。
+
+### 第二部分 · CUDA 入门与工具包（第 13—19 章）
+
+介绍 CUDA 工具包、Linux 环境安装和 GPU 软硬件层级，完成第一个 CUDA 项目的编写、编译与运行，并讲解线程束（Warp）等执行模型概念。最后通过向量加法，将主机与设备、网格与线程块等知识落实到完整程序中。
+
+### 第三部分 · 向量加法实战（第 20—21 章）
+
+围绕向量加法扩展程序规模与数据形式，将基础内核编写延伸到大规模数据处理，巩固内存传输、索引计算和线程组织方式。
+
+### 第四部分 · 性能分析与工具（第 22—31 章）
+
+从设备属性查询和 `nvidia-smi` 开始，讲解占用率、延迟隐藏及每个 SM 的活跃线程块，并系统介绍 CUDA 错误检查、Nsight Compute 和 Nsight 系列工具。重点不只是工具操作，还包括如何依据测量结果定位性能问题，形成可复用的分析方法。
+
+### 第五部分 · 并行编程技术（第 32—43 章）
+
+通过矩阵加法、向量归约等案例，讨论非 2 幂数据处理、线程利用率、共享内存、L1 缓存、内存层次、线程束分化与 Shuffle 操作。同时介绍 Visual Studio 调试、竞态条件排查和归约优化，将并行算法、内存访问与正确性验证结合起来。
+
+### 第六部分 · 矩阵乘法与张量核心（第 44—53 章）
+
+以矩阵乘法为综合实践，先建立朴素实现和 Roofline 性能模型，再依次应用共享内存分块（Tiling）、`float4` 向量化与分块策略优化。随后进入张量核心、WMMA API 和 cuBLAS，比较不同实现的性能与适用场景，理解如何从基础 CUDA 内核走向硬件专用计算单元。
+
+## 推荐阅读方式
+
+- **系统学习**：按章节顺序阅读。前几部分的硬件与执行模型概念会在后续优化实践中反复使用。
+- **关注性能优化**：先阅读第 22—31 章建立分析工具基础，再学习第 34—35 章的内存与共享内存，以及第 44—48 章的 Roofline 和矩阵乘法优化。
+- **关注张量核心**：在掌握矩阵乘法、分块和内存层次后，直接阅读第 49—53 章。
+- **边读边实践**：结合章节中的 CUDA 代码、执行时间和图示进行复现；每次优化后重新测量，而不是仅凭理论推断性能。
+
+## 本地阅读与构建
+
+网站使用 **MkDocs Material** 构建，正文为 Markdown，章节图片位于 `docs/resources/`。本地预览不需要 NVIDIA GPU。
+
+### 创建环境并启动
 
 在项目根目录执行：
 
 ```bash
-.venv/Scripts/python.exe -m pip install -r requirements.txt
-.venv/Scripts/python.exe -m mkdocs serve
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m mkdocs serve -a 0.0.0.0:8000
 ```
 
-打开 <http://127.0.0.1:8000/cuda-ebook/> 即可阅读。按 `Ctrl+C` 停止手动启动的服务。
+打开 <http://127.0.0.1:8000/cuda-ebook/> 即可阅读。按 `Ctrl+C` 停止服务。
 
-如需重新创建虚拟环境：
+### 构建静态网站
 
 ```bash
-python -m venv .venv
-.venv/Scripts/python.exe -m pip install -r requirements.txt
+.venv/bin/python -m mkdocs build --strict
 ```
 
-## 构建
+生成的网站位于 `site/`。`--strict` 会将文档警告视为错误，适合提交前检查。
 
-```bash
-.venv/Scripts/python.exe -m mkdocs build --strict
-```
+### 发布
 
-生成的网站位于 `site/`。构建后的线上首页地址为：
+推送到 `main` 分支后，`.github/workflows/deploy.yml` 会通过 GitHub Actions 自动构建并发布到 **<https://zhaojiew10.github.io/cuda-ebook/>**。
 
-```text
-https://zhaojiew10.github.io/cuda-ebook/
-```
-
-## 目录结构
-
-```text
-docs/
-  index.md                       电子书首页及章节目录
-  chapters/                      54 个 Markdown 章节
-  resources/                     章节图片
-mkdocs.yml                       MkDocs Material 配置及导航
-requirements.txt                 构建依赖
-.github/workflows/deploy.yml     GitHub Pages 部署工作流
-```
-
-## 发布到 GitHub Pages
-
-仓库 Pages 配置位于：
-
-<https://github.com/zhaojiew10/cuda-ebook/settings/pages>
-
-**Build and deployment → Source** 应选择 **GitHub Actions**。如果未启用 Pages，`actions/configure-pages` 会报 `Get Pages site failed` / `HttpError: Not Found`。
-
-推送到 `main` 分支后，`.github/workflows/deploy.yml` 会自动构建并发布到 **<https://zhaojiew10.github.io/cuda-ebook/>**。
+仓库的 **Settings → Pages → Build and deployment → Source** 应选择 **GitHub Actions**。仓库地址为 <https://github.com/zhaojiew10/cuda-ebook>。
